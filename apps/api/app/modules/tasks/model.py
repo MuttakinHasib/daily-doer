@@ -1,6 +1,5 @@
 from typing import Optional
-from pydantic import EmailStr
-from sqlmodel import Field, SQLModel
+from sqlmodel import SQLModel
 
 from app.common.entity import BaseEntity
 
@@ -13,9 +12,5 @@ class TaskBase(SQLModel):
     due_date: str
 
 
-class TaskRegister(TaskBase):
-    password: str = Field(min_length=6)
-
-
 class Task(BaseEntity, TaskBase, table=True):
-    password: str = Field(min_length=6)
+    pass

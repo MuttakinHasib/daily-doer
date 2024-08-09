@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c580b40cedf8
+Revision ID: 7cc6b31cd2ae
 Revises: 
-Create Date: 2024-08-09 15:46:08.609463
+Create Date: 2024-08-10 01:12:27.756915
 
 """
 from typing import Sequence, Union
@@ -13,7 +13,7 @@ import sqlmodel
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c580b40cedf8'
+revision: str = '7cc6b31cd2ae'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -36,11 +36,11 @@ def upgrade() -> None:
     op.create_table('user',
     sa.Column('email', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('name', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
-    sa.Column('password', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('isSuperUser', sa.Boolean(), nullable=False),
     sa.Column('id', sa.Uuid(), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.Column('password', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
