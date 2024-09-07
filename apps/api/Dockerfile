@@ -23,5 +23,4 @@ COPY . .
 
 RUN chmod +x /app/prestart.sh
 
-
-CMD ["bash", "-c", "./prestart.sh && fastapi run --port 80" ]
+CMD ["bash", "-c", "./prestart.sh", "&&", "fastapi", "run", "app/main.py", "--port", "80" ]

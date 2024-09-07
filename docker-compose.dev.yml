@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: apps/api
+      dockerfile: Dockerfile
+    command: [ "fastapi", "dev", "--host", "0.0.0.0" ]
+    image: api
+    env_file: apps/api/.env
+    volumes:
+      - ./apps/api:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: daily_doer
+    ports:
+      - "5432:5432"
+    volumes:
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database:
