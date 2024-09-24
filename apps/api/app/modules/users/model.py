@@ -19,6 +19,11 @@ class UserRegister(SQLModel):
     password: str
 
 
+class UserLogin(SQLModel):
+    email: EmailStr
+    password: str
+
+
 class User(BaseEntity, UserBase, table=True):
     password: str = Field(min_length=8)
     pass

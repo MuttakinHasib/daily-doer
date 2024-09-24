@@ -21,7 +21,7 @@ def get_users(session: SessionDependency, skip: int = 0, limit: int = 10):
 
 
 @router.post("", response_model=UserPublic)
-def create_user(session: SessionDependency, body: UserRegister):
+def register(session: SessionDependency, body: UserRegister):
     findUserStatement = select(User).where(User.email == body.email)
     existingUser = session.exec(findUserStatement).first()
 
