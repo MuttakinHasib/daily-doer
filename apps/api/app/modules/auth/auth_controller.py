@@ -5,7 +5,7 @@ from app.modules.users.model import User, UserLogin
 from app.core.database import SessionDependency
 from app.common.model import DefaultMessageResponse
 from app.utils.security import verify_password
-from app.utils.jwt_token import create_auth_token
+from app.utils.jwt_token import create_token
 
 
 router = APIRouter(tags=["Auth"], prefix="/auth")
@@ -26,7 +26,7 @@ async def login(session: SessionDependency, body: UserLogin, response: Response)
             detail="Oops! Looks like you entered the wrong password",
         )
 
-    token = create_auth_token({"id": str(user.id), "email": user.email})
+    token = create_token({"id": str(user.id), "email": user.email})
 
     response.set_cookie(
         key="auth",
