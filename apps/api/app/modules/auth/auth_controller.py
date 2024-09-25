@@ -1,8 +1,8 @@
-from fastapi import APIRouter, HTTPException, Response, status
+from fastapi import APIRouter, Depends, HTTPException, Response, status
 from sqlmodel import select
 
 from app.modules.users.model import User, UserLogin
-from app.core.database import SessionDependency
+from app.core.dependency import CurrentUser, SessionDependency
 from app.common.model import DefaultMessageResponse
 from app.utils.security import verify_password
 from app.utils.jwt_token import create_token
@@ -33,4 +33,10 @@ async def login(session: SessionDependency, body: UserLogin, response: Response)
         value=token,
         httponly=True,
     )
+
     return {"message": "Login successful"}
+
+
+@router.get("/me")
+def me(current_user: CurrentUser):
+    return current_user

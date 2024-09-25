@@ -10,6 +10,7 @@ class UserBase(SQLModel):
         index=True,
     )
     name: str
+    avatar: str = Field(nullable=True)
     isSuperUser: bool = False
 
 

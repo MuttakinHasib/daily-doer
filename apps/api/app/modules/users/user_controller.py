@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from sqlmodel import col, delete, func, select
 
-from app.core.database import SessionDependency
+from app.core.dependency import SessionDependency
 from app.modules.users.model import User, UserPublic, UserRegister
 from app.utils.security import hash_password
 
